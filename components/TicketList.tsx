@@ -1,6 +1,26 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
+import { Card, CardContent } from "@/components/ui/card";
+
+// Department color mapping (not category!)
+const departmentColors: Record<string, string> = {
+  "IT Support": "bg-blue-500",
+  "Human Resources (HR)": "bg-pink-500",
+  "Finance": "bg-yellow-500",
+  "Operations": "bg-green-500",
+  "Customer Service": "bg-orange-500",
+  "Engineering": "bg-purple-500",
+  "Marketing": "bg-red-400",
+  "Legal": "bg-indigo-600",
+  "Sales": "bg-emerald-500",
+  "Product Management": "bg-sky-500",
+  "Quality Assurance (QA)": "bg-lime-500",
+  "Facilities": "bg-zinc-500",
+  "Procurement": "bg-rose-500",
+  "Security": "bg-cyan-600",
+  "Other": "bg-gray-500",
+};
 
 interface Ticket {
   _id: string;
@@ -38,28 +58,42 @@ export default function TicketList({ userId }: { userId: string }) {
     if (userId) fetchTickets();
   }, [userId]);
 
-  if (loading) return <p>Loading tickets...</p>;
-  if (error) return <p className="text-red-600">Error: {error}</p>;
-  if (!tickets.length) return <p>No tickets found.</p>;
+  if (loading) return <p className="text-gray-300">Loading tickets...</p>;
+  if (error) return <p className="text-red-500 font-semibold">Error: {error}</p>;
+  if (!tickets.length) return <p className="text-gray-400">No tickets found.</p>;
 
   return (
-    <div>
-      <h2 className="text-xl font-bold mb-4">Your Tickets</h2>
-      {tickets.map((ticket) => (
-        <div key={ticket._id} className="mb-4 p-4 border rounded bg-gray-700">
-          <h3 className="font-semibold">Category: {ticket.category}</h3>
-          <p>Department: {ticket.department}</p>
-          <p>Urgency: {ticket.urgency}</p>
-          <ul className="list-disc list-inside ml-4">
-            {ticket.points.map((point, i) => (
-              <li key={i}>{point}</li>
-            ))}
-          </ul>
-          <p className="text-sm text-gray-500 mt-2">
-            Created at: {new Date(ticket.createdAt).toLocaleString()}
-          </p>
-        </div>
-      ))}
-    </div>
+    <>
+      {tickets.map((ticket) => {
+        const colorClass = departmentColors[ticket.department] || "bg-gray-500";
+
+        return (
+          <Card
+            key={ticket._id}
+            className="bg-[#1f2937] text-white rounded-2xl border-none shadow-md hover:shadow-xl transition-shadow"
+          >
+            <CardContent className="p-5 space-y-4">
+              <div className="flex justify-between items-center">
+                <h2 className="text-lg font-bold text-white">{ticket.category}</h2>
+                <span className={`text-xs px-3 py-1 rounded-full text-white ${colorClass}`}>
+                  {ticket.department}
+                </span>
+              </div>
+
+              <ul className="list-disc list-inside text-sm text-gray-300 space-y-1 ml-2">
+                {ticket.points.map((point, i) => (
+                  <li key={i}>{point}</li>
+                ))}
+              </ul>
+
+              <div className="flex justify-between items-center text-xs text-gray-400 pt-2">
+                <span>Urgency: {ticket.urgency}</span>
+                <span>{new Date(ticket.createdAt).toLocaleString()}</span>
+              </div>
+            </CardContent>
+          </Card>
+        );
+      })}
+    </>
   );
 }

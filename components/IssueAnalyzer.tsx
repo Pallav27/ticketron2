@@ -67,7 +67,7 @@ export default function IssueAnalyzer() {
 
   return (
     <main className="container mx-auto p-4">
-      <h1 className="text-2xl font-bold mb-4">Issue Analyzer</h1>
+      <h1 className="text-2xl font-bold mb-4">Query Sorter</h1>
       <form onSubmit={handleSubmit} className="mb-6">
         <textarea
           rows={5}
@@ -82,14 +82,14 @@ export default function IssueAnalyzer() {
           disabled={loading}
           className="mt-2 px-4 py-2 bg-blue-600 text-white rounded disabled:opacity-50"
         >
-          {loading ? "Analyzing..." : "Analyze Issue"}
+          {loading ? "Analyzing..." : "Submit Issue"}
         </button>
       </form>
 
       {error && <p className="text-red-600 mb-4">Error: {error}</p>}
 
       {parsed && (
-        <div className="border p-4 rounded shadow bg-gray-50">
+        <div className="border p-4 rounded shadow bg-gray-700">
           <h2 className="font-semibold text-lg mb-2">Category: {parsed.category}</h2>
           <h3 className="font-semibold mb-1">Department: {parsed.department}</h3>
           <h4 className="mb-2">
