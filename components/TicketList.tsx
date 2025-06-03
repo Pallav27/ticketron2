@@ -46,7 +46,7 @@ export default function TicketList({ userId }: { userId: string }) {
     <div>
       <h2 className="text-xl font-bold mb-4">Your Tickets</h2>
       {tickets.map((ticket) => (
-        <div key={ticket._id} className="mb-4 p-4 border rounded bg-gray-100">
+        <div key={ticket._id} className="mb-4 p-4 border rounded bg-gray-700">
           <h3 className="font-semibold">Category: {ticket.category}</h3>
           <p>Department: {ticket.department}</p>
           <p>Urgency: {ticket.urgency}</p>

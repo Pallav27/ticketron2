@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { auth } from "@clerk/nextjs/server";
 import { connectToDatabase } from "@/lib/mongodb";
-import  Ticket  from "@/models/ticket";
+import  Ticket  from "@/models/Ticket";
 
 export async function GET() {
   const { userId } = await auth();
