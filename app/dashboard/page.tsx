@@ -1,8 +1,11 @@
+import { auth } from "@clerk/nextjs/server";
 import { UserButton } from "@clerk/nextjs";
 import IssueAnalyzer from "@/components/IssueAnalyzer";
 import TicketList from "@/components/TicketList";
 
-export default function Dashboard() {
+export default async function Dashboard() {
+  const { userId } = await auth();
+
   return (
     <div className="p-6 max-w-3xl mx-auto">
       <div className="flex justify-between items-center mb-4">
@@ -10,8 +13,7 @@ export default function Dashboard() {
         <UserButton />
       </div>
       <IssueAnalyzer />
-      <TicketList userId={""} />
-      {/* Replace with actual user ID from Clerk or context */}
+      <TicketList userId={userId ?? ""} />
     </div>
   );
 }
