@@ -1,9 +1,13 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, {
+  useEffect,
+  useState,
+  useImperativeHandle,
+  forwardRef,
+} from "react";
 import { Card, CardContent } from "@/components/ui/card";
 
-// Department color mapping (not category!)
 const departmentColors: Record<string, string> = {
   "IT Support": "bg-blue-500",
   "Human Resources (HR)": "bg-pink-500",
@@ -32,31 +36,41 @@ interface Ticket {
   createdAt: string;
 }
 
-export default function TicketList({ userId }: { userId: string }) {
+interface TicketListProps {
+  userId: string;
+}
+
+const TicketList = forwardRef(function TicketList(
+  { userId }: TicketListProps,
+  ref
+) {
   const [tickets, setTickets] = useState<Ticket[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  useEffect(() => {
-    const fetchTickets = async () => {
-      setLoading(true);
-      setError(null);
-      try {
-        const res = await fetch("/api/tickets");
-        if (!res.ok) throw new Error("Failed to fetch tickets");
-        const data = await res.json();
-        setTickets(data || []);
-      } catch (err: any) {
-        console.error(err);
-        setError(err.message || "Unknown error");
-        setTickets([]);
-      } finally {
-        setLoading(false);
-      }
-    };
+  const fetchTickets = async () => {
+    setLoading(true);
+    setError(null);
+    try {
+      const res = await fetch(`/api/tickets?userId=${userId}`);
+      if (!res.ok) throw new Error("Failed to fetch tickets");
+      const data = await res.json();
+      setTickets(data || []);
+    } catch (err: any) {
+      setError(err.message || "Unknown error");
+      setTickets([]);
+    } finally {
+      setLoading(false);
+    }
+  };
 
-    if (userId) fetchTickets();
-  }, [userId]);
+  useImperativeHandle(ref, () => ({
+    refresh: fetchTickets,
+  }));
+
+  useEffect(() => {
+    fetchTickets(); // load tickets on mount
+  }, []);
 
   if (loading) return <p className="text-gray-300">Loading tickets...</p>;
   if (error) return <p className="text-red-500 font-semibold">Error: {error}</p>;
@@ -96,4 +110,6 @@ export default function TicketList({ userId }: { userId: string }) {
       })}
     </>
   );
-}
+});
+
+export default TicketList;

@@ -2,7 +2,11 @@
 
 import React, { useState } from "react";
 
-export default function IssueAnalyzer() {
+export default function IssueAnalyzer({
+  onNewTicket,
+}: {
+  onNewTicket?: () => void;
+}) {
   const [prompt, setPrompt] = useState("");
   const [result, setResult] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
@@ -46,7 +50,6 @@ export default function IssueAnalyzer() {
 
       setResult(data.result);
 
-      // Parse and save to DB
       const parsed = parseResult(data.result);
       await fetch("/api/tickets", {
         method: "POST",
@@ -56,6 +59,8 @@ export default function IssueAnalyzer() {
           ...parsed,
         }),
       });
+
+      if (onNewTicket) onNewTicket();
     } catch (e: any) {
       setError(e.message);
     } finally {
@@ -67,7 +72,7 @@ export default function IssueAnalyzer() {
 
   return (
     <main className="container mx-auto p-4">
-      <h1 className="text-2xl font-bold mb-4">Query Sorter</h1>
+      <h1 className="text-2xl font-bold mb-4 text-yellow-400">QUERY SORTER</h1>
       <form onSubmit={handleSubmit} className="mb-6">
         <textarea
           rows={5}
