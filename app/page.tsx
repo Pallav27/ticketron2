@@ -12,7 +12,7 @@ export default function LandingPage() {
       {/* Navbar */}
       <header className="w-full px-6 py-4 flex justify-between items-center border-b border-gray-800">
         <h1 className="text-2xl font-bold text-white">
-          TICKE<span className="text-yellow-400">TRON</span>
+          TICKE<span className="text-green-400">TRON</span>
         </h1>
         <SignedOut>
           <SignInButton mode="modal">

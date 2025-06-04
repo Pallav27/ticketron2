@@ -35,7 +35,7 @@ export default function Dashboard() {
   if (!user) return null;
 
   return (
-    <div className="min-h-screen bg-black text-white p-6">
+    <div className="min-h-screen bg-gradient-to-b from-gray-950 to-black text-white p-6">
       <div className="max-w-7xl mx-auto space-y-6">
         <div className="flex justify-between items-center">
           <h1 className="text-3xl font-bold tracking-tight text-white drop-shadow-md">
@@ -44,7 +44,7 @@ export default function Dashboard() {
           <UserButton />
         </div>
 
-        <Card className="bg-[#111827] text-white shadow-lg rounded-2xl border-none">
+        <Card className="backdrop-blur-xl bg-white/10 border border-white/10 shadow-xl rounded-2xl">
           <CardContent className="p-6">
             <IssueAnalyzer onNewTicket={handleNewTicket} />
           </CardContent>

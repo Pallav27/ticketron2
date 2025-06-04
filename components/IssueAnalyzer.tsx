@@ -73,10 +73,11 @@ export default function IssueAnalyzer({
   return (
     <main className="container mx-auto p-4">
       <h1 className="text-2xl font-bold mb-4 text-yellow-400">QUERY SORTER</h1>
+      <h1 className="text-1xl font-bold mb-4 text-white">Gemini 2.0 Flash</h1>
       <form onSubmit={handleSubmit} className="mb-6">
         <textarea
           rows={5}
-          className="w-full p-2 border border-gray-300 rounded"
+          className="w-full p-2 border border-gray-300 rounded text-white"
           value={prompt}
           onChange={(e) => setPrompt(e.target.value)}
           placeholder="Describe your issue here..."
@@ -94,7 +95,7 @@ export default function IssueAnalyzer({
       {error && <p className="text-red-600 mb-4">Error: {error}</p>}
 
       {parsed && (
-        <div className="border p-4 rounded shadow bg-gray-700">
+        <div className="border p-4 rounded shadow text-white bg-gray-700">
           <h2 className="font-semibold text-lg mb-2">Category: {parsed.category}</h2>
           <h3 className="font-semibold mb-1">Department: {parsed.department}</h3>
           <h4 className="mb-2">

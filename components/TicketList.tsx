@@ -7,6 +7,7 @@ import React, {
   forwardRef,
 } from "react";
 import { Card, CardContent } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge"; // ✅ Added import
 
 const departmentColors: Record<string, string> = {
   "IT Support": "bg-blue-500",
@@ -89,9 +90,11 @@ const TicketList = forwardRef(function TicketList(
             <CardContent className="p-5 space-y-4">
               <div className="flex justify-between items-center">
                 <h2 className="text-lg font-bold text-white">{ticket.category}</h2>
-                <span className={`text-xs px-3 py-1 rounded-full text-white ${colorClass}`}>
+
+                {/* ✅ Replaced <span> with ShadCN <Badge> */}
+                <Badge className={`${colorClass} text-white text-xs px-3 py-1 rounded-full`}>
                   {ticket.department}
-                </span>
+                </Badge>
               </div>
 
               <ul className="list-disc list-inside text-sm text-gray-300 space-y-1 ml-2">
