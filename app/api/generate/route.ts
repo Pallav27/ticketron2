@@ -61,8 +61,12 @@ Department: <department>
     if (!text) throw new Error("No response from Gemini");
 
     return NextResponse.json({ result: text });
-  } catch (err: any) {
+  } catch (err: unknown) {
+  if (err instanceof Error) {
     console.error("Gemini API Error:", err.message);
-    return new NextResponse("Server Error", { status: 500 });
+  } else {
+    console.error("Unknown Gemini API Error", err);
   }
+  return new NextResponse("Server Error", { status: 500 });
+}
 }

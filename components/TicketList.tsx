@@ -7,7 +7,7 @@ import React, {
   forwardRef,
 } from "react";
 import { Card, CardContent } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge"; // ✅ Added import
+import { Badge } from "@/components/ui/badge";
 
 const departmentColors: Record<string, string> = {
   "IT Support": "bg-blue-500",
@@ -43,7 +43,7 @@ interface TicketListProps {
 
 const TicketList = forwardRef(function TicketList(
   { userId }: TicketListProps,
-  ref
+  ref: React.Ref<{ refresh: () => void }>
 ) {
   const [tickets, setTickets] = useState<Ticket[]>([]);
   const [loading, setLoading] = useState(false);
@@ -55,10 +55,14 @@ const TicketList = forwardRef(function TicketList(
     try {
       const res = await fetch(`/api/tickets?userId=${userId}`);
       if (!res.ok) throw new Error("Failed to fetch tickets");
-      const data = await res.json();
+      const data: Ticket[] = await res.json();
       setTickets(data || []);
-    } catch (err: any) {
-      setError(err.message || "Unknown error");
+    } catch (err: unknown) {
+      if (err instanceof Error) {
+        setError(err.message);
+      } else {
+        setError("Unknown error");
+      }
       setTickets([]);
     } finally {
       setLoading(false);
@@ -70,7 +74,8 @@ const TicketList = forwardRef(function TicketList(
   }));
 
   useEffect(() => {
-    fetchTickets(); // load tickets on mount
+    fetchTickets();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   if (loading) return <p className="text-gray-300">Loading tickets...</p>;
@@ -90,8 +95,6 @@ const TicketList = forwardRef(function TicketList(
             <CardContent className="p-5 space-y-4">
               <div className="flex justify-between items-center">
                 <h2 className="text-lg font-bold text-white">{ticket.category}</h2>
-
-                {/* ✅ Replaced <span> with ShadCN <Badge> */}
                 <Badge className={`${colorClass} text-white text-xs px-3 py-1 rounded-full`}>
                   {ticket.department}
                 </Badge>

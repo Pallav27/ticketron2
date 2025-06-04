@@ -61,9 +61,14 @@ export default function IssueAnalyzer({
       });
 
       if (onNewTicket) onNewTicket();
-    } catch (e: any) {
-      setError(e.message);
-    } finally {
+    } catch (e: unknown) {
+        if (e instanceof Error) {
+          setError(e.message);
+        } else {
+          setError("An unknown error occurred.");
+        }
+    }
+     finally {
       setLoading(false);
     }
   }
