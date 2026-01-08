@@ -1,36 +1,46 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Ticketron2
 
-## Getting Started
+Ticketron2 is a web application built on **Next.js** for efficient ticket management and a seamless user experience. Designed for businesses and organizations that require an easy-to-use ticketing system, Ticketron2 leverages state-of-the-art tools and modern design principles to deliver a polished solution.
 
-First, run the development server:
+## Features
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- Efficient ticket creation and management powered by **Mongoose/MongoDB**
+- Styled with **Tailwind CSS** for a modern responsive UI
+- Smooth animations using **Framer Motion**
+- Lightweight utilities using `clsx` and `class-variance-authority`.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Key Files
+- `next.config.js` - Project configuration for Next.js
+- `tsconfig.json` - TypeScript configuration
+- `tailwind.config.js` - TailwindCSS configuration
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Dependencies
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+The project relies on the following libraries:
+- **Frontend:**
+  - Next.js (v15+)
+  - React & ReactDOM
+  - Framer Motion
+  - Lucide React
+- **Styling:**
+  - Tailwind CSS
+  - `clsx` & `tailwind-merge`
+- **Backend:**
+  - Clerk.js
+  - Axios
+  - Mongoose for MongoDB
 
-## Learn More
+**Development tools:**
+- ESLint for code linting
+- Tailwind PostCSS plugins
+- TypeScript for better code maintainability
 
-To learn more about Next.js, take a look at the following resources:
+### Contributions & Feedback
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+We welcome contributions! Open issues and pull requests are encouraged.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- Bug reports & discussions [here](https://github.com/Pallav27/ticketron2/issues)
+- For questions: [Contact](https://github.com/Pallav27)
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+---
+Built by [**Pallav27**](https://github.com/Pallav27)
