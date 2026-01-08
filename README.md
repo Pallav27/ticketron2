@@ -1,4 +1,4 @@
-# Ticketron2
+# Ticketron
 
 Ticketron2 is a web application built on **Next.js** for efficient ticket management and a seamless user experience. Designed for businesses and organizations that require an easy-to-use ticketing system, Ticketron2 leverages state-of-the-art tools and modern design principles to deliver a polished solution.
 
